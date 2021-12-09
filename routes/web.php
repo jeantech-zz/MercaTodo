@@ -24,4 +24,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::name('register.store')->post('/registerClient', [RegisterController::class, 'store']);
 
+Route::Resource('user', UserController::class)->only(['store']);
+
 
