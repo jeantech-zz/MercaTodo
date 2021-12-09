@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Register\RegisterController;   
+//use App\Http\Controllers\User\UserController;   
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +22,10 @@ Auth::routes(['verify' => true ]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::name('register.store')->post('/registerClient', [RegisterController::class, 'store']);
-
-Route::Resource('user', UserController::class)->only(['store']);
+Route::middleware(['auth','verified'])->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+   // Route::name('home')->get('/home', [HomeController::class, 'index']);
+});
+//Route::Resource('user', UserController::class)->only(['store']);
 
 

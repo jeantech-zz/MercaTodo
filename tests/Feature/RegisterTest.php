@@ -20,7 +20,7 @@ class RegisterTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $data = $this->registerUserData();
-        $response = $this->post('/registerClient', $data);
+        $response = $this->post('/register', $data);
         
         $this->assertDatabaseHas('users',[
             'name' => 'Jennifer',
