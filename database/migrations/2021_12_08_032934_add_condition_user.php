@@ -14,8 +14,10 @@ class AddConditionUser extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('phone_number');
-            $table->string('address');
+            $table->string('phone_number')->nullable();
+            $table->string('address')->nullable();
+            $table->boolean('confirmed')->default(0);
+            $table->string('confirmation_code')->nullable();
             $table->foreignId('rol_id')->nullable()->constrained('rols');
         });
     }
