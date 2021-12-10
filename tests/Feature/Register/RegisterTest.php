@@ -80,7 +80,7 @@ class RegisterTest extends TestCase
             'password' =>'jeante18',
             'password_confirmation' => 'jeante18',
             'phone_number' => '31243435',
-            'address' => 'carrera 1 #1-12',
+            'address' => 'carrera 1 #1-1',
             ]
         ];
     }
