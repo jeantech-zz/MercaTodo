@@ -39,8 +39,7 @@ class RegisterTest extends TestCase
     public function test_it_validate_request_data_register(string $name,string  $email,string  $password, string  $password_confirmation, string $phone_number, string  $address, string $field): void
     {
         $response = $this->post('/register', compact('name','email','password', 'password_confirmation', 'phone_number', 'address'));
-        //$response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
-        
+
         $response->assertInvalid([$field]);
     }
 
