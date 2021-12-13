@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\User;
 
 use App\Actions\User\CreateActions;
+use App\Actions\User\UpdateActions;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\IndexRequest;
-use App\Http\Requests\User\UserRequest;
+use App\Http\Requests\User\CreateRequest;
+use App\Http\Requests\User\UpdateRequest;
 use App\Models\User;
 use App\Repositories\User\UserRepositories;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\View\View;
-//use Illuminate\Http\Request;
 
 
 class UserController extends Controller
@@ -34,7 +35,7 @@ class UserController extends Controller
         return view('users.create', compact('user'));
     }
 
-    public function store(UserRequest $request)
+    public function store(CreateRequest $request)
     {
         $user = CreateActions::execute($request->validated());
         event(new Registered($user));
@@ -43,30 +44,24 @@ class UserController extends Controller
         
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        dd($id);
+       
         $user = $this->userRepositories->userId($id);
-
         return view('users.edit', compact('user'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request)
     {
-        //
+        $user = UpdateActions::execute($request->validated());
+        return redirect()->route('user.index')->with('success', 'User Update successfully.');
+    }
+
+    public function disableEnable($id)
+    {
+        $user = DisableActions::execute($id);
+
+        return redirect()->route('user.index')->with('success', 'User Update successfully.');
     }
 
 

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\Rule;
 
-class UserRequest extends FormRequest
+class CreateRequest extends FormRequest
 {
     public function authorize():bool
     {
