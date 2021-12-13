@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\User;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -8,23 +8,26 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
-class RegisterTest extends TestCase
+class CreateTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_registration_screen_can_be_rendered(): void
+    public function test_user_screen_can_be_rendered(): void
     {
-        $response = $this->get('/register');
+        $user = User::factory()->create();
+        $response = $this->actingAs($user)->get('/user');
+
         $response->assertStatus(200);
     }
 
     /**
      * @dataProvider userProvider
      */
-    public function test_new_users_can_register(string $name, string  $email,string  $password, string  $password_confirmation, string $phone_number, string  $address ): void
+    public function test_new_users_can_create(string $name, string  $email,string  $password, string  $password_confirmation, string $phone_number, string  $address ): void
     {
-        $response = $this->post('/register', compact('name','email','password', 'password_confirmation', 'phone_number', 'address'));
-        
+        $user = User::factory()->create();
+        $response = $this->actingAs($user)->post('/user', compact('name','email','password', 'password_confirmation', 'phone_number', 'address'));
+    
         $this->assertDatabaseHas('users',[
             'name' => 'Jennifer',
             'email' => 'jeante18@gmail.com',
@@ -36,9 +39,10 @@ class RegisterTest extends TestCase
     /**
      * @dataProvider invalidDataProvider
      */
-    public function test_it_validate_request_data_register(string $name,string  $email,string  $password, string  $password_confirmation, string $phone_number, string  $address, string $field): void
+    public function test_it_validate_request_data_user(string $name,string  $email,string  $password, string  $password_confirmation, string $phone_number, string  $address, string $field): void
     {
-        $response = $this->post('/register', compact('name','email','password', 'password_confirmation', 'phone_number', 'address'));
+        $user = User::factory()->create();
+        $response = $this->actingAs($user)->post('/user', compact('name','email','password', 'password_confirmation', 'phone_number', 'address'));
 
         $response->assertInvalid([$field]);
     }
@@ -46,10 +50,10 @@ class RegisterTest extends TestCase
      /**
      * @dataProvider userProvider
      */
-    public function test_email_is_unique(string $name,string  $email,string  $password, string  $password_confirmation, string $phone_number, string  $address): void
+    public function test_email_is_unique_user(string $name,string  $email,string  $password, string  $password_confirmation, string $phone_number, string  $address): void
     {
         $user= User::factory()->create(compact('name','email','password', 'phone_number', 'address'));
-        $this->test_it_validate_request_data_register($name, $email, $password, $password_confirmation, $phone_number, $address, 'email');
+        $this->test_it_validate_request_data_user($name, $email, $password, $password_confirmation, $phone_number, $address, 'email');
     }
 
 
