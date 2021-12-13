@@ -14,7 +14,6 @@ class CreateTest extends TestCase
 
     public function test_user_screen_can_be_rendered(): void
     {
-        $this->withoutExceptionHandling();
         $user = User::factory()->create();
         $response = $this->actingAs($user)->get('/user');
 
