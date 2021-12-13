@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\User;
 
-class UserActions
+class CreateActions
 {
     public static function execute(array $data): User
     {
