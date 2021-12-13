@@ -35,13 +35,11 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
-										<th>user Info</th>
 										<th>Name</th>
                                         <th>Email</th>
                                         <th>Phone Number</th>
                                         <th>Address</th>
-
+                                        
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -56,7 +54,11 @@
                                             <td>{{ $user->address }}</td>
 
                                             <td>
+                                                
+                                                <form action="{{ route('user.disable',$user->id) }}" method="POST">
                                                 <a class="btn btn-sm btn-success" href="{{ route('user.edit',$user->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> disable</button>
+                                                </form>                                               
                                             </td>
                                         </tr>
                                     @endforeach
