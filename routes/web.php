@@ -25,7 +25,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware(['auth','verified'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    Route::Resource('user', UserController::class)->only(['index','create','store','edit','update']);
+    Route::Resource('users', UserController::class)->except(['show', 'destroy']);
     Route::post('user/{user}',[UserController::class,'disableEnable'])->name('user.disable');
 
 });
