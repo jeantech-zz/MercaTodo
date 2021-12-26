@@ -10,17 +10,18 @@ use App\Http\Requests\User\CreateRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\Models\User;
 use App\ViewModels\Users\UserIndexViewModel;
+use App\ViewModels\Users\UserCreateViewModel;
+use App\ViewModels\Users\UserEditViewModel;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 
 class UserController extends Controller
 {
-    public function __construct(UserRepositories $userRepositories){
-        $this->userRepositories = $userRepositories;
-    }
-/**
+    /**
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function index(IndexRequest $request, UserIndexViewModel $viewModel): View
@@ -31,14 +32,14 @@ class UserController extends Controller
         return view('users.index', $viewModel->toArray());
     }
 
-    public function create():view
+    public function create(UserCreateViewModel $viewModel): View
     {
-        $user = new User();
-        return view('users.create', compact('user'));
+        return view('layouts.create', $viewModel);
     }
 
-    public function store(CreateRequest $request)
+    public function store(CreateRequest $request): RedirectResponse
     {
+        dd('entro');
         $user = CreateActions::execute($request->validated());
         event(new Registered($user));
 
@@ -46,14 +47,14 @@ class UserController extends Controller
         
     }
 
-    public function edit($user)
+    public function edit(User $user): View
     {
-       
-        $user = $this->userRepositories->userId($id);
-        return view('users.edit', compact('user'));
+        $viewModel = new UserEditViewModel($user);
+
+        return view('layouts.edit', $viewModel);
     }
 
-    public function update(UpdateRequest $request)
+    public function update(UpdateRequest $request): RedirectResponse
     {
         $user = UpdateActions::execute($request->validated());
         return redirect()->route('user.index')->with('success', 'User Update successfully.');

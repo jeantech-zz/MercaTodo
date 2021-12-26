@@ -24,7 +24,7 @@
             <td>{{ $user->phone_number }}</td>
             <td>{{ $user->address }}</td>
             <td class="has-text-centered">
-            <a href="{{ route('users.edit', ['user' => $user]) }}">
+                <a href="{{ route('users.edit', ['user' => $user]) }}">
                     <b-icon size="is-small" type="is-info" icon="pencil"/>
                 </a>
             </td>

@@ -33,16 +33,8 @@ class UserIndexViewModel extends ViewModel
 
     protected function headers(): array
     {
-       // return array_merge(trans('users.fields'), parent::headers());
-       return trans('users.fields');
+       return array_merge(trans('users.fields'), parent::headers());
     }
-
-   /*   protected function filters(): array
-    {
-        return [
-            'multiple' => old('users.multiple') ?? request()->input('filters.multiple'),
-        ];
-    }*/
 
     protected function data(): array
     {

@@ -15,7 +15,7 @@ class UserFilters extends Filter
 
     protected function select(): Filter
     {
-        $this->query->select(['name','email','phone_number','address']);
+        $this->query->select(['id', 'name','email','phone_number','address']);
         return $this;
     }
 }

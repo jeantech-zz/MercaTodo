@@ -10,23 +10,14 @@
                     <aside class="menu">
                         <p class="menu-label">@lang('menu.administration')</p>
                         <ul class="menu-list">
-                            <li><a href="#"><em class="pr-2 mdi mdi-cash"></em>@lang('transactions.titles.details')</a></li>
-                            <li>
-                                <a href="{{ route('users.index') }}">
-                                    <em class="is-active pr-2 mdi mdi-piggy-bank-outline"></em>@lang('merchants.navbar.title')
-                                </a>
-                                <ul>
-                                    <li><a>Payment methods</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#"><em class="pr-2 mdi mdi-map-legend"></em>@lang('Countries')</a></li>
-                            <li><a href="#"><em class="pr-2 mdi mdi-currency-usd"></em>@lang('Currencies')</a></li>
+                            <li><a href="#"><em class="pr-2 mdi mdi-map-legend"></em>Products</a></li>
+                            <li><a href="#"><em class="pr-2 mdi mdi-currency-usd"></em>Reports</a></li>
                         </ul>
 
                         <p class="menu-label">@lang('menu.security')</p>
                         <ul class="menu-list">
-                            <li><a href=""><em class="pr-2 mdi mdi-shield-lock"></em>@lang('permissions.navbar.title')</a></li>
-                            <li><a href=""><em class="pr-2 mdi mdi-login"></em>@lang('Last logins')</a></li>
+                            <li><a href=""><em class="pr-2 mdi mdi-shield-lock"></em>permissions</a></li>
+                            <li><a href=""><em class="pr-2 mdi mdi-account-multiple"></em>Users</a></li>
                         </ul>
 
                         <p class="menu-label">@lang('menu.system')</p>
