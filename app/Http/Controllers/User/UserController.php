@@ -49,11 +49,9 @@ class UserController extends Controller
         
     }
 
-    public function edit(User $user): View
+    public function edit(User $user, UserEditViewModel $viewModel): View
     {
-        $viewModel = new UserEditViewModel($user);
-
-        return view('layouts.edit', $viewModel);
+        return view('layouts.edit', $viewModel->model($user));
     }
 
     public function update(UpdateRequest $request): RedirectResponse

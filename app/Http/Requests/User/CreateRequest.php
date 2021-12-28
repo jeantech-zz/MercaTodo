@@ -19,10 +19,10 @@ class CreateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z\s]+$/u' ],
-            'Email' => ['required', 'email','max:255',  Rule::unique('users', 'email')->ignore($this->users)],
-            'Password' => ['required', Rules\Password::defaults()],
-            'Phone' => ['string', 'max:255'],
-            'Address' => ['string', 'max:255' ],
+            'email' => ['required', 'email','max:255',  Rule::unique('users', 'email')->ignore($this->users)],
+            'phone_number' => ['string', 'max:255'],
+            'address' => ['string', 'max:255' ],
+            'password' => ['required', Rules\Password::defaults()],
          ];
     }
 }
