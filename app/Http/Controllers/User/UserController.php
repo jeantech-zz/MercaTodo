@@ -57,7 +57,7 @@ class UserController extends Controller
     public function update(UpdateRequest $request): RedirectResponse
     {
         $user = UpdateActions::execute($request->validated());
-        return redirect()->route('user.index')->with('success', 'User Update successfully.');
+        return redirect()->route('users.index')->with('success', 'User Update successfully.');
     }
 
     public function disableEnable($id)

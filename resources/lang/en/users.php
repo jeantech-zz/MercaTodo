@@ -32,12 +32,13 @@ return [
         'password_confirmation' => 'Password Confirmation',        
     ],
     'inputs' => [
+        'id' => 'id',
         'name' => 'name',
-        'email' => 'Email',
-        'phone_number' => 'Phone',
-        'address' => 'Address',
-        'password' => 'Password',
-        'password_confirmation' => 'Password Confirmation',
+        'email' => 'email',
+        'phone_number' => 'phone_number',
+        'address' => 'address',
+        'password' => 'password',
+        'password_confirmation' => 'password_confirmation',
     ],
     'placeholders' => [
         'multiple' => 'Search by name, brand or document',
