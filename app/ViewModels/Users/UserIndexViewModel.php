@@ -28,6 +28,7 @@ class UserIndexViewModel extends ViewModel
     {
         return [
             'name' => old('filters.name') ?? request()->input('filters.name'),
+            'email' => old('filters.email') ?? request()->input('filters.email'),
         ];
     }
 

@@ -14,8 +14,6 @@ return [
         'email' => 'Email',
         'phone_number' => 'Phone',
         'address' => 'Address',
-        'password' => 'Password',
-        'password_confirmation' => 'Password Confirmation',
     ],
     'buttons' => [
         'save' => 'Create User',
@@ -51,4 +49,14 @@ return [
         'password_confirmation' => 'Enter User Password Confirmation',
     
     ],
+    'message_error' => [
+        'name' => 'Enter User name3...',
+        'email' => 'Enter User Emai3l',
+        'phone_number' => 'Enter User Phone3',
+        'address' => 'Enter User Address3',
+        'password' => 'Enter User Password3',
+        'password_confirmation' => '3Enter User Password Confirmation',
+    ],
+
+    
 ];

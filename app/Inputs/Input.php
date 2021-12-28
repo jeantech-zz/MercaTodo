@@ -11,8 +11,9 @@ abstract class Input
         public string $label,
         public string $name,
         public string $placeholder = '',
+        public string $message_error = '',
         public bool $required = false,
-        public array $data = []
+        public array $data = []        
     ) {
     }
 

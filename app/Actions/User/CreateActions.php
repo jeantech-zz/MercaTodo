@@ -12,11 +12,12 @@ class CreateActions
     {
         return User::create([
             'name' =>  $data['name'],
-            'email' => $data['email'] ,
-            'password' => Hash::make($data['password']),
-            'phone_number' => $data['phone_number'] ,
-            'address' => $data['address'] ,
+            'email' => $data['Email'] ,
+            'password' => Hash::make($data['Password']),
+            'phone_number' => $data['Phone'] ,
+            'address' => $data['Address'] ,
             'confirmation_code' =>  Str::random(15)
         ]);
     }
 }
+

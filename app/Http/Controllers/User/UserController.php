@@ -37,13 +37,15 @@ class UserController extends Controller
         return view('layouts.create', $viewModel);
     }
 
+    /**
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
     public function store(CreateRequest $request): RedirectResponse
     {
-        dd('entro');
         $user = CreateActions::execute($request->validated());
         event(new Registered($user));
 
-      return redirect()->route('user.index')->with('success', 'User created successfully.');
+      return redirect()->route('users.index')->with('success', 'User created successfully.');
         
     }
 

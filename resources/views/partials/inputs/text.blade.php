@@ -1,6 +1,8 @@
 <b-field
     label="{{ $field->label }}"
-    horizontal>
+    horizontal
+    type="{{ $errors->has( $field->name  ) ? 'is-danger' : null }}" message="{{ $errors->first( $field->message_error ) }}"
+    >
     <b-input
         type="text"
         id="{{ $field->name }}"
@@ -10,3 +12,5 @@
         value="{{ old($field->name, $model->{$field->name}) }}">
     </b-input>
 </b-field>
+
+
