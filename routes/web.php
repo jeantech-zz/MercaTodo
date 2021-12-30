@@ -23,7 +23,7 @@ Route::get('/', function () {
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::middleware(['auth','verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
 
     Route::get('dashboard', DashboardController::class)->name('dashboard');
 
