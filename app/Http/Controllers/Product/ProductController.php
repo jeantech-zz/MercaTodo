@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Product;
 
+use App\Actions\Product\CreateActions;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\IndexRequest;
+use App\Http\Requests\Product\CreateRequest;
 use App\Models\Product;
+use App\ViewModels\Products\ProductCreateViewModel;
 use App\ViewModels\Products\ProductIndexViewModel;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -23,25 +27,21 @@ class ProductController extends Controller
         return view('products.index', $viewModel->toArray());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(ProductCreateViewModel $viewModel): View
     {
-        //
+        return view('layouts.create', $viewModel);
     }
 
+
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function store(Request $request)
+    public function store(CreateRequest $request): RedirectResponse
     {
-        //
+        $product = CreateActions::execute($request->validated());
+
+      return redirect()->route('products.index')->with('success', 'User created successfully.');
+        
     }
 
     /**

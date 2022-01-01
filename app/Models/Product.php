@@ -10,4 +10,18 @@ class Product extends Model
 {
     use HasFactory;
     use HasFilters;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'name',
+        'description',
+        'price',
+        'image'
+    ];
+
+
 }
