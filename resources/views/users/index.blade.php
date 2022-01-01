@@ -24,9 +24,15 @@
             <td>{{ $user->phone_number }}</td>
             <td>{{ $user->address }}</td>
             <td class="has-text-centered">
-                <a href="{{ route('users.edit', ['user' => $user]) }}">
-                    <b-icon size="is-small" type="is-info" icon="pencil"/>
-                </a>
+                <form action="{{ route('users.disable',$user->id) }}" method="POST">
+                    <a href="{{ route('users.edit', ['user' => $user]) }}">
+                        <b-icon size="is-small" type="is-info" icon="pencil"/>
+                    </a>
+                    <button type="submit" class="button is-primary">
+                        @lang('users.buttons.disable')
+                     </button>
+                     <i-button></i-button>
+                 </form>
             </td>
         </tr>
     @endforeach

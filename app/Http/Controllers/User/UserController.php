@@ -60,8 +60,9 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'User Update successfully.');
     }
 
-    public function disableEnable($id)
+    public function disable($user)
     {
+        dd($user);
         $user = DisableActions::execute($id);
 
         return redirect()->route('user.index')->with('success', 'User Update successfully.');

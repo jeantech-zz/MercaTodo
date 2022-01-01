@@ -5,7 +5,8 @@
 @import '~buefy/dist/buefy.css';
 
 // Fontawesome
-@import '~@fortawesome/fontawesome-free/css/all.css';
+//@import '~@fortawesome/fontawesome-free/css/all.css';
+@import "node_modules/font-awesome/scss/font-awesome.scss";
 
 [v-cloak] {
     display: none;

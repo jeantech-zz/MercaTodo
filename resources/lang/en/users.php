@@ -18,6 +18,7 @@ return [
     'buttons' => [
         'save' => 'Create User',
         'cancel' => 'Cancel User',
+        'disable' => 'Disable'
     ],
     'message' => [
         'success' => 'created successfully.',

@@ -58,7 +58,8 @@
                                                 <form action="{{ route('user.disable',$user->id) }}" method="POST">
                                                 <a class="btn btn-sm btn-success" href="{{ route('user.edit',$user->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> disable</button>
-                                                </form>                                               
+                                                </form> 
+                                                                                             
                                             </td>
                                         </tr>
                                     @endforeach
