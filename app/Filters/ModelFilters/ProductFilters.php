@@ -15,7 +15,7 @@ class ProductFilters extends Filter
 
     protected function select(): Filter
     {
-        $this->query->select(['id', 'name','price','image']);
+        $this->query->select(['id', 'name','description','price','image']);
         return $this;
     }
 }
