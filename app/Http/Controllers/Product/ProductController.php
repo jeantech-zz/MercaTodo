@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Product;
 
 use App\Actions\Product\CreateActions;
+use App\Actions\Product\UpdateActions;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\IndexRequest;
 use App\Http\Requests\Product\CreateRequest;
+use App\Http\Requests\Product\UpdateRequest;
 use App\Models\Product;
 use App\ViewModels\Products\ProductCreateViewModel;
 use App\ViewModels\Products\ProductIndexViewModel;
+use App\ViewModels\Products\ProductEditViewModel;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -40,8 +43,19 @@ class ProductController extends Controller
     {
         $product = CreateActions::execute($request->validated());
 
-      return redirect()->route('products.index')->with('success', 'User created successfully.');
+      return redirect()->route('products.index')->with('success', 'Product created successfully.');
         
+    }
+
+    public function edit(Product $product, ProductEditViewModel $viewModel): View
+    {
+        return view('layouts.edit', $viewModel->model($product));
+    }
+
+    public function update(UpdateRequest $request): RedirectResponse
+    {
+        $product = UpdateActions::execute($request->validated());
+        return redirect()->route('products.index')->with('success', 'Product Update successfully.');
     }
 
     /**
@@ -51,29 +65,6 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Product $product)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Product $product)
     {
         //
     }
