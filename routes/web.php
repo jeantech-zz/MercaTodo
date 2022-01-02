@@ -29,8 +29,8 @@ Route::middleware(['auth','verified'])->group(function () {
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    Route::Resource('users', UserController::class)->only(['index','create','store','edit','update','disable']);
-    Route::post('users/{user}/disable',[UserController::class,'disable'])->name('users.disable');
+    Route::Resource('users', UserController::class)->only(['index','create','store','edit','update','destroy']);
+    Route::POST('users/disable',[UserController::class,'disable'])->name('users.disable');
 
 });
 
