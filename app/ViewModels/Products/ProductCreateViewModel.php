@@ -5,7 +5,6 @@ namespace App\ViewModels\Products;
 use App\Inputs\Input;
 use App\Inputs\NumberInput;
 use App\Inputs\TextInput;
-use App\Inputs\PasswordInput;
 use App\Models\Product;
 use App\ViewModels\ViewModel;
 
