@@ -11,7 +11,7 @@ class AddColumnsToUsers extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('phone_number')->nullable();
             $table->string('address')->nullable();      
-            $table->foreignId('rol_id')->nullable()->constrained('rols');
+            $table->foreignId('rol_id')->nullable()->constrained('roles');
         });
     }
 

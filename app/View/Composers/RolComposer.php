@@ -10,8 +10,8 @@ class RolComposer
     public function compose(View $view): void
     {
         $view->with(
-            'countries',
-            DB::table('rols')->select('name')->orderBy('name')->get(),
+            'roles',
+            DB::table('roles')->select('name')->orderBy('name')->get(),
         );
     }
 }

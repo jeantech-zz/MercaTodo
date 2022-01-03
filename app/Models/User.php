@@ -48,8 +48,14 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function rols(): HasMany
-    {
-        return $this->hasMany(Rol::class);
+    public function role(){
+        return $this->belongsTo(Role::class,'rol_id');
+    }
+
+    public function isClient(){
+        if($this->role->name=='Client'){
+            return true;
+        }
+        return false;
     }
 }

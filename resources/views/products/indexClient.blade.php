@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.client')
 @section('content')
 <table class="table is-narrow is-hoverable is-fullwidth">
     <caption class="is-hidden">{{ $texts['title'] }}</caption>
