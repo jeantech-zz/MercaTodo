@@ -23,14 +23,6 @@
             <td>{{ $product->description }}</td>
             <td>{{ $product->price }}</td>
             <td><img src="{{ $product->image }}"/></td>
-
-            <td class="has-text-centered">
-                <form action="{{ route('products.destroy',$product->id) }}" method="POST">
-                    <a href="{{ route('products.edit', ['product' => $product]) }}">
-                        <b-icon size="is-small" type="is-info" icon="pencil"/>
-                    </a>
-                 </form>
-            </td>
         </tr>
     @endforeach
     </tbody>

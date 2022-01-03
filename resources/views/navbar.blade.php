@@ -2,7 +2,7 @@
     <div class="container">
         <div class="navbar-brand">
             <a class="navbar-item" href="{{ url('/') }}">
-                <img src="https://drive.google.com/file/d/1MXW1NWUikRKF3fuVnLRN_wJOrmqJRphC/view?usp=sharing" class="attachment-0x0 size-0x0" alt="" loading="lazy">
+                <img src="/storage/MercatodoLogo.png" class="attachment-0x0 size-1000x100" alt="" loading="lazy">
             </a>
 
             <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="main-navbar">

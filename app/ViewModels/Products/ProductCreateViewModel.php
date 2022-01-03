@@ -5,6 +5,7 @@ namespace App\ViewModels\Products;
 use App\Inputs\Input;
 use App\Inputs\NumberInput;
 use App\Inputs\TextInput;
+use App\Inputs\FileInput;
 use App\Models\Product;
 use App\ViewModels\ViewModel;
 
@@ -26,7 +27,7 @@ class ProductCreateViewModel extends ViewModel
 
     protected function title(): string
     {
-        return trans('users.titles.create');
+        return trans('products.titles.create');
     }
 
     /**
@@ -56,7 +57,7 @@ class ProductCreateViewModel extends ViewModel
                 trans('products.message_error.price'),
                 true
             ),
-            new TextInput(
+            new FileInput(
                 trans('products.labels.image'),
                 trans('products.inputs.image'),
                 trans('products.placeholders.image'),

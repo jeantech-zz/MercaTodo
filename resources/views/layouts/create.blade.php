@@ -3,7 +3,7 @@
 @section('content')
     <template>
         <section>
-            <form id="submit" method="POST" action="{{ $action }}">
+            <form id="submit" method="POST" action="{{ $action }}"  enctype="multipart/form-data">
                 @csrf
                 @foreach($fields as $field)
                     {{ $field->render($model) }}

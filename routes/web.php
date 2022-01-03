@@ -34,7 +34,7 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::POST('users/disable',[UserController::class,'disable'])->name('users.disable');
 
     Route::Resource('products', ProductController::class)->only(['index','create','store','edit','update','destroy']);
-
+    Route::GET('products/indexClient',[ProductController::class,'indexClient'])->name('products.indexClient');
 });
 
 

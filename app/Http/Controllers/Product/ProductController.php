@@ -11,11 +11,12 @@ use App\Http\Requests\Product\UpdateRequest;
 use App\Models\Product;
 use App\ViewModels\Products\ProductCreateViewModel;
 use App\ViewModels\Products\ProductIndexViewModel;
-use App\ViewModels\Products\ProductEditViewModel;
+use App\ViewModels\Products\ProductIndexClientViewModel;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -30,6 +31,18 @@ class ProductController extends Controller
         return view('products.index', $viewModel->toArray());
     }
 
+     /**
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    public function indexClient (IndexRequest $request, ProductIndexClientViewModel $viewModel): View
+    {
+        $products = Product::filter($request->input('filters', []))->paginate();
+        $viewModel->collection($products);
+
+        return view('products.indexClient', $viewModel->toArray());
+    }
+
+
     public function create(ProductCreateViewModel $viewModel): View
     {
         return view('layouts.create', $viewModel);
@@ -41,7 +54,10 @@ class ProductController extends Controller
      */
     public function store(CreateRequest $request): RedirectResponse
     {
-        $product = CreateActions::execute($request->validated());
+        $imagen = $request->file('image')->store('public/product');
+        $url = Storage::url($imagen);
+
+        $product = CreateActions::execute($request->validated(),  $url );
 
       return redirect()->route('products.index')->with('success', 'Product created successfully.');
         
