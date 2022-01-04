@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Product;
 
 use App\Actions\Product\CreateActions;
 use App\Actions\Product\UpdateActions;
+use App\Actions\Product\DeleteActions;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\IndexRequest;
 use App\Http\Requests\Product\CreateRequest;
@@ -81,14 +82,10 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Product Update successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Product $product)
+    public function destroy(int $id): RedirectResponse
     {
-        //
+        $product = DeleteActions::execute($id);
+        return redirect()->route('products.index')->with('success', 'Product Delete successfully.');
+    
     }
 }
