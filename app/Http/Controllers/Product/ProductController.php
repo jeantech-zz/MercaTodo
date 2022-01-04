@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+    private GameRepositories $gameRepositories;
      /**
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
@@ -54,8 +55,14 @@ class ProductController extends Controller
      */
     public function store(CreateRequest $request): RedirectResponse
     {
-        $imagen = $request->file('image')->store('public/product');
-        $url = Storage::url($imagen);
+        $urlProduct = config('app.urlProduct');
+
+        if(is_object($request->file('image'))) {
+            $imagen = $request->file('image')->store($urlProduct);
+            $url = Storage::url($imagen);
+        }else{
+            $url = $request->image;
+        }
 
         $product = CreateActions::execute($request->validated(),  $url );
 
@@ -72,17 +79,6 @@ class ProductController extends Controller
     {
         $product = UpdateActions::execute($request->validated());
         return redirect()->route('products.index')->with('success', 'Product Update successfully.');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
-    {
-        //
     }
 
     /**

@@ -15,7 +15,7 @@ class CreateTest extends TestCase
     public function test_user_screen_can_be_rendered(): void
     {
         $user = User::factory()->create();
-        $response = $this->actingAs($user)->get('/user');
+        $response = $this->actingAs($user)->get('/users');
 
         $response->assertStatus(200);
     }
@@ -26,7 +26,7 @@ class CreateTest extends TestCase
     public function test_new_users_can_create(string $name, string  $email,string  $password, string  $password_confirmation, string $phone_number, string  $address ): void
     {
         $user = User::factory()->create();
-        $response = $this->actingAs($user)->post('/user', compact('name','email','password', 'password_confirmation', 'phone_number', 'address'));
+        $response = $this->actingAs($user)->post('/users', compact('name','email','password', 'password_confirmation', 'phone_number', 'address'));
     
         $this->assertDatabaseHas('users',[
             'name' => 'Jennifer',
@@ -42,7 +42,7 @@ class CreateTest extends TestCase
     public function test_it_validate_request_data_user(string $name,string  $email,string  $password, string  $password_confirmation, string $phone_number, string  $address, string $field): void
     {
         $user = User::factory()->create();
-        $response = $this->actingAs($user)->post('/user', compact('name','email','password', 'password_confirmation', 'phone_number', 'address'));
+        $response = $this->actingAs($user)->post('/users', compact('name','email','password', 'password_confirmation', 'phone_number', 'address'));
 
         $response->assertInvalid([$field]);
     }

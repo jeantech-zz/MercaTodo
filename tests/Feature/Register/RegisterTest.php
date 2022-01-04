@@ -21,24 +21,23 @@ class RegisterTest extends TestCase
     /**
      * @dataProvider userProvider
      */
-    public function test_new_users_can_register(string $name, string  $email,string  $password, string  $password_confirmation, string $phone_number, string  $address ): void
+    public function test_new_users_can_register(string $name, string  $email,string  $password, string  $password_confirmation): void
     {
-        $response = $this->post('/register', compact('name','email','password', 'password_confirmation', 'phone_number', 'address'));
+
+        $response = $this->post('/register', compact('name','email','password', 'password_confirmation'));
         
         $this->assertDatabaseHas('users',[
             'name' => 'Jennifer',
-            'email' => 'jeante18@gmail.com',
-            'phone_number' => '31243435',
-            'address' => 'carrera 1 #1-1',
+            'email' => 'jeante18@gmail.com'
         ]);  
     }
 
     /**
      * @dataProvider invalidDataProvider
      */
-    public function test_it_validate_request_data_register(string $name,string  $email,string  $password, string  $password_confirmation, string $phone_number, string  $address, string $field): void
+    public function test_it_validate_request_data_register(string $name,string  $email,string  $password, string  $password_confirmation, string $field): void
     {
-        $response = $this->post('/register', compact('name','email','password', 'password_confirmation', 'phone_number', 'address'));
+        $response = $this->post('/register', compact('name','email','password', 'password_confirmation'));
 
         $response->assertInvalid([$field]);
     }
@@ -49,7 +48,7 @@ class RegisterTest extends TestCase
     public function test_email_is_unique(string $name,string  $email,string  $password, string  $password_confirmation, string $phone_number, string  $address): void
     {
         $user= User::factory()->create(compact('name','email','password', 'phone_number', 'address'));
-        $this->test_it_validate_request_data_register($name, $email, $password, $password_confirmation, $phone_number, $address, 'email');
+        $this->test_it_validate_request_data_register($name, $email, $password, $password_confirmation, 'email');
     }
 
 
@@ -64,9 +63,6 @@ class RegisterTest extends TestCase
             'email max' => array_merge($data, ['email' => Str::random(255), 'field' => 'email']),            
             'password required' => array_merge($data, ['password' => '', 'field' => 'password']),            
             'password min' => array_merge($data, ['password' => 'jen', 'field' => 'password']), 
-            'phone_number max' => array_merge($data, ['phone_number' => Str::random(256), 'field' => 'phone_number']),
-            'address max' => array_merge($data, ['address' => Str::random(256), 'field' => 'address']),           
-            
         ];
     }
 
