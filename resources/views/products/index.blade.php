@@ -22,13 +22,16 @@
             <td>{{ $product->name }}</td>
             <td>{{ $product->description }}</td>
             <td>{{ $product->price }}</td>
-            <td><img src="{{ $product->image }}"/></td>
+            <td><img src="{{ $product->image }}" width="60" height="60" /></td>
 
             <td class="has-text-centered">
                 <form action="{{ route('products.destroy',$product->id) }}" method="POST">
                     <a href="{{ route('products.edit', ['product' => $product]) }}">
                         <b-icon size="is-small" type="is-info" icon="pencil"/>
                     </a>
+                    <button class="button is-success" type="submit" form="submit"><em class="fas fa-save mr-2"></em>
+                        @lang('products.buttons.delete')
+                    </button>
                  </form>
             </td>
         </tr>
