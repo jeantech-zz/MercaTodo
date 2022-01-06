@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+
 <table class="table is-narrow is-hoverable is-fullwidth">
     <caption class="is-hidden">{{ $texts['title'] }}</caption>
     <thead>
@@ -29,9 +30,9 @@
                     <a href="{{ route('products.edit', ['product' => $product]) }}">
                         <b-icon size="is-small" type="is-info" icon="pencil"/>
                     </a>
-                    <button class="button is-success" type="submit" form="submit"><em class="fas fa-save mr-2"></em>
-                        @lang('products.buttons.delete')
-                    </button>
+                    <b-input type="hidden" id="id" name="id" value="{{ $product->id }}"> </b-input>
+        
+                    <i-button @click="clickMe( {{ $product->id }} )" value="{{ $product->id }}" ></i-button> 
                  </form>
             </td>
         </tr>

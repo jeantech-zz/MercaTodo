@@ -11,6 +11,7 @@ use App\Http\Requests\Product\CreateRequest;
 use App\Http\Requests\Product\UpdateRequest;
 use App\Models\Product;
 use App\ViewModels\Products\ProductCreateViewModel;
+use App\ViewModels\Products\ProductEditViewModel;
 use App\ViewModels\Products\ProductIndexViewModel;
 use App\ViewModels\Products\ProductIndexClientViewModel;
 use Illuminate\Contracts\Container\BindingResolutionException;
