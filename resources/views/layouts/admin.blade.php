@@ -1,4 +1,4 @@
-@extends('layouts.app')
+
 @push('main')
     @include('navbar')
 @endpush

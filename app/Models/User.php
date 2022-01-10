@@ -26,7 +26,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'phone_number',
-        'address'
+        'address',
+        'rol_id'
     ];
 
     /**
@@ -53,7 +54,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function isClient(){
-        if($this->role->name=='Client'){
+        if($this->role->name == 'Client'){
             return true;
         }
         return false;
