@@ -175,6 +175,10 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\ModelFilterProvider::class,
+        App\Providers\ViewServiceProvider::class,
+        App\Providers\FortifyViewsServiceProvider::class,
+        App\Providers\FortifyServiceProvider::class,
 
     ],
 

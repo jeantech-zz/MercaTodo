@@ -9,56 +9,60 @@ use App\Http\Requests\User\IndexRequest;
 use App\Http\Requests\User\CreateRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\Models\User;
-use App\Repositories\User\UserRepositories;
+use App\ViewModels\Users\UserIndexViewModel;
+use App\ViewModels\Users\UserCreateViewModel;
+use App\ViewModels\Users\UserEditViewModel;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 
 class UserController extends Controller
 {
-    public function __construct(UserRepositories $userRepositories){
-        $this->userRepositories = $userRepositories;
-    }
-
-    public function index():view
+    /**
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    public function index(IndexRequest $request, UserIndexViewModel $viewModel): View
     {
-        $users = $this->userRepositories->userPaginate();
+        $users = User::filter($request->input('filters', []))->paginate();
+        $viewModel->collection($users);
 
-        return view('users.index', compact('users'))
-            ->with('i', (request()->input('page', 1) - 1) * $users->perPage());
-   
+        return view('users.index', $viewModel->toArray());
     }
 
-    public function create():view
+    public function create(UserCreateViewModel $viewModel): View
     {
-        $user = new User();
-        return view('users.create', compact('user'));
+        return view('layouts.create', $viewModel);
     }
 
-    public function store(CreateRequest $request)
+    /**
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    public function store(CreateRequest $request): RedirectResponse
     {
         $user = CreateActions::execute($request->validated());
         event(new Registered($user));
 
-      return redirect()->route('user.index')->with('success', 'User created successfully.');
+      return redirect()->route('users.index')->with('success', 'User created successfully.');
         
     }
 
-    public function edit($id)
+    public function edit(User $user, UserEditViewModel $viewModel): View
     {
-       
-        $user = $this->userRepositories->userId($id);
-        return view('users.edit', compact('user'));
+        return view('layouts.edit', $viewModel->model($user));
     }
 
-    public function update(UpdateRequest $request)
+    public function update(UpdateRequest $request): RedirectResponse
     {
         $user = UpdateActions::execute($request->validated());
-        return redirect()->route('user.index')->with('success', 'User Update successfully.');
+        return redirect()->route('users.index')->with('success', 'User Update successfully.');
     }
 
-    public function disableEnable($id)
+    public function disable(Request $request): RedirectResponse
     {
+        dd($request);
         $user = DisableActions::execute($id);
 
         return redirect()->route('user.index')->with('success', 'User Update successfully.');

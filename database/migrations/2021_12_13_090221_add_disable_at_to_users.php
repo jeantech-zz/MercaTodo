@@ -6,12 +6,10 @@ use Illuminate\Support\Facades\Schema;
 
 class AddDisableAtToUsers extends Migration
 {
-
-
     public function up():void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->timestamp('disable_at')->nullable()->after('remember_token');
+            $table->timestamp('disable_at')->nullable();
         });
     }
 
