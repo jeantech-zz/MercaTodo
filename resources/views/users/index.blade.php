@@ -28,6 +28,9 @@
                         <b-icon size="is-small" type="is-info" icon="pencil"/>
                     </a>
                 <i-button></i-button>
+                <button class="button is-success" type="submit" form="submit"><em class="fas fa-save mr-2"></em>
+                        @lang('users.buttons.disable')
+                    </button
             </td>
         </tr>
     @endforeach

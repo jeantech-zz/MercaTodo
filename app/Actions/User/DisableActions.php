@@ -12,15 +12,10 @@ class DisableActions
     {
        
         $record = User::find($id);
-dd( $record);
-        /*if
+
             $record->update([ 
-                'name' =>  $data['name'],
-                'email' => $data['email'] ,
-                'password' => Hash::make($data['password']),
-                'phone_number' => $data['phone_number'] ,
-                'address' => $data['address']
-            ]);*/
+                'disable_at' => date("Y-m-d H:i:s")  
+            ]);
 
         return $record;
     }

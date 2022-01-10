@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 @push('main')
 <div class="container">
@@ -25,3 +26,4 @@
     </div>
 </div>
 @endpush
+

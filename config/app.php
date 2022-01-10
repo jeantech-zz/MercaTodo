@@ -238,4 +238,5 @@ return [
         'Html' => Illuminate\Html\HtmlFacade::class,
     ],
 
+    'urlProduct' => env('LOGIN_PAY', 'public/product'),
 ];

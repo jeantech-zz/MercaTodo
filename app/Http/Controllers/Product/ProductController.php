@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Product;
 
 use App\Actions\Product\CreateActions;
 use App\Actions\Product\UpdateActions;
+use App\Actions\Product\DeleteActions;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\IndexRequest;
 use App\Http\Requests\Product\CreateRequest;
 use App\Http\Requests\Product\UpdateRequest;
 use App\Models\Product;
 use App\ViewModels\Products\ProductCreateViewModel;
+use App\ViewModels\Products\ProductEditViewModel;
 use App\ViewModels\Products\ProductIndexViewModel;
 use App\ViewModels\Products\ProductIndexClientViewModel;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -20,6 +22,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+    private GameRepositories $gameRepositories;
      /**
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
@@ -54,8 +57,14 @@ class ProductController extends Controller
      */
     public function store(CreateRequest $request): RedirectResponse
     {
-        $imagen = $request->file('image')->store('public/product');
-        $url = Storage::url($imagen);
+        $urlProduct = config('app.urlProduct');
+
+        if(is_object($request->file('image'))) {
+            $imagen = $request->file('image')->store($urlProduct);
+            $url = Storage::url($imagen);
+        }else{
+            $url = $request->image;
+        }
 
         $product = CreateActions::execute($request->validated(),  $url );
 
@@ -74,25 +83,10 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Product Update successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
+    public function destroy(int $id): RedirectResponse
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Product $product)
-    {
-        //
+        $product = DeleteActions::execute($id);
+        return redirect()->route('products.index')->with('success', 'Product Delete successfully.');
+    
     }
 }
